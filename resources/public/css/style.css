@@ -1,0 +1,16 @@
+.content {
+  display: flex;
+}
+
+.widget {
+  margin-left: 20px;
+}
+
+.widget h2 {
+  margin-top: 0;
+}
+
+.upload-error span {
+  color: red;
+  padding-top: 25px;
+}
