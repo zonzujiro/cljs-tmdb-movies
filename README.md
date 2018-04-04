@@ -1,10 +1,6 @@
 # cljs-tmdb-movies
 
-Small learning project on ClojureScript.
-
-This is table editor for a two-column CSV format: the first column contains string value (e.g. label), the second contains a numeric value (e.g. quantity).
-
-Input data is loaded as file. Few simple aggregations of the loaded data should be shown alongside the table.
+Small learning project on ClojureScript
 
 ## Setup
 
