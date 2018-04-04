@@ -19,13 +19,4 @@
    "APPID" api-key})
 
 (defn get-popular-movies []
-  (fetch "/movie/popular" {"api_key" api-key}))
-
-(defn get-today-forecast [city]
-  (-> (js/Promise.all [(fetch "/weather" (get-params city)) (fetch "/forecast" (get-params city))])
-      (.then #(into [] %))
-      (.then #(if (every? right? %)
-                (right %)
-                (left %)))))
-
-           
+  (fetch "/movie/popular" {"api_key" api-key}))        
