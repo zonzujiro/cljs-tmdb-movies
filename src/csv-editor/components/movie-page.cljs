@@ -11,5 +11,8 @@
 
 (rum/defc MoviePage < rum/reactive 
   [movie]
-  (js/console.log (clj->js movie))
-  [:div])
+  ; (js/console.log (clj->js movie))
+  [:div
+    [:p "This is movie page"]
+    [:a {:href "#/"}
+      "Go back"]])
