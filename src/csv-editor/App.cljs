@@ -1,7 +1,8 @@
 (ns tmdb-movies.app
   (:require [rum.core :as rum]
             [tmdb-movies.utils.either :refer [right? right-value left-value]]
-            [tmdb-movies.utils.api :refer [get-popular-movies]]))
+            [tmdb-movies.utils.api :refer [get-popular-movies]]
+            [tmdb-movies.components.movie-card :refer [MovieCard]]))
   
 (def init-state 
   {:popular []
@@ -18,15 +19,9 @@
 (-> (get-popular-movies)
     (.then #(handle-fetch %)))
 
-(rum/defc MovieCard [movie]
-  [:div.movie-card
-    [:h4 (.-title movie)]
-    [:a {:href (str "#/movie/" (.-id movie))}
-     "Open movie"]])
-
 (rum/defc App < rum/reactive []
   (let [popular (:popular (rum/react app-state))]
-    (js/console.log (clj->js popular))
+    ; (js/console.log (clj->js popular))
     [:div.root-container
       [:h1 "Movies"]
       [:div
