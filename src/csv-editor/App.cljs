@@ -6,7 +6,6 @@
   
 (def init-state 
   {:popular []
-   :current-movie nil
    :error? false})
 
 (def app-state (atom init-state))

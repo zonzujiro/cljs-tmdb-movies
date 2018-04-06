@@ -14,9 +14,9 @@
       (.then #(right %))
       (.catch #(left %))))
 
-(defn get-params [city]
-  {"q" city 
-   "APPID" api-key})
-
+; TODO: move default query to fetch
 (defn get-popular-movies []
-  (fetch "/movie/popular" {"api_key" api-key}))        
+  (fetch "/movie/popular" {"api_key" api-key}))
+  
+(defn get-movie [id]  
+  (fetch (str "/movie/" id) {"api_key" api-key}))
