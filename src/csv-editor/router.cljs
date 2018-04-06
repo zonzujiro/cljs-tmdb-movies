@@ -1,17 +1,16 @@
 (ns tmdb-movies.router
   (:require [rum.core :as rum] 
+            [clojure.string :as string]
             [tmdb-movies.app :refer [App]]
             [tmdb-movies.components.movie-page :refer [MoviePage]]))
-; TODO: Move next-route to state
+
 (def init-state 
- {:current-route "/"
-  :current-component App
-  :params {}})
+  {:route nil
+   :params {}})
 
 (def routes 
   [{:component App
     :href "/"}
-
    {:component MoviePage
     :href "/movie/:id"}])
 
@@ -19,11 +18,9 @@
     
 (def router-state (atom init-state))
 
-(defn href-to-regexp [url]
-  (re-pattern (clojure.string/replace url url-param-regex "(.*)")))
-
 (defn match-path [href url]
-  (re-matches (href-to-regexp href) url))
+  (let [pattern (re-pattern (string/replace href url-param-regex "(.*)"))]
+   (re-matches pattern url)))
 
 ; TODO consider adding macros for vector find
 (defn find-route [routes next-href]
@@ -34,22 +31,21 @@
         keys (map #(keyword %) (re-seq url-param-regex href))]
    (zipmap keys values)))
 
-(defn on-hash-change []
+(defn select-route []
   (let [next-href (subs (aget js/window "location" "hash") 1)
         next-route (find-route routes next-href)]
     (when-not (nil? next-route) 
-      (swap! router-state assoc :current-component (:component next-route) 
+      (swap! router-state assoc :route next-route
                                 :params (extract-params (:href next-route) next-href)))))
 
-; (js/console.log (clj->js (equal-path? "/movie/:id/actor/:actorId" "/movie/16/actor/48")))
+(.addEventListener js/window "hashchange" select-route)
 
-(.addEventListener js/window "hashchange" on-hash-change)
+(select-route)
 
-; TODO: Pass map with params
 (rum/defcs Router < rum/reactive []
   ; (js/console.log (clj->js @router-state))
-  (let [Component (:current-component (rum/react router-state))]
+  (let [Component (get-in (rum/react router-state) [:route :component])]
     [:div
-      (Component {:params (:params (rum/react router-state))})]))
+      (Component @router-state)]))
     
   
