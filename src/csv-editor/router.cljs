@@ -36,7 +36,7 @@
             (.addEventListener js/window "hashchange" #(select-route routes))
             (select-route routes))
           state)})
-
+; TODO: Rewright to component with inner state
 (rum/defcs Router
   < rum/reactive 
     init-route-mixin
