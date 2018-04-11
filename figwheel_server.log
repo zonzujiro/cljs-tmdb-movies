@@ -1314,3 +1314,57 @@ notifying browser that file changed:  resources/public/js/compiled/out/tmdb_movi
 [0mCompiling "resources/public/js/compiled/tmdb-movies.js" from ["src"]...[0m
 [32mSuccessfully compiled "resources/public/js/compiled/tmdb-movies.js" in 1.434 seconds.[0m
 notifying browser that file changed:  resources/public/js/compiled/out/tmdb_movies/router.js
+[0mCompiling "resources/public/js/compiled/tmdb-movies.js" from ["src"]...[0m
+[36m----  Compiler Warning on   src/csv-editor/router.cljs   line:38  column:17  ----[0m
+
+  [1mWrong number of args (2) passed to cljs.core/empty[0m
+
+  [36m34[0m  [36m  {:init (fn [state][0m
+  [36m35[0m  [36m           (let [routes (first (:rum/args state))[0m
+  [36m36[0m  [36m                 url (subs (aget js/window "location" "hash") 1)][0m
+  [36m37[0m  [36m            (.addEventListener js/window "hashchange" #(select-route routes))[0m
+  [33m38[0m  [1m            (if (empty url "")[0m
+  [0m  [0m  [33m                ^--- Wrong number of args (2) passed to cljs.core/empty[0m
+  [36m39[0m  [36m              (aset js/window "location" "hash" "/")[0m
+  [36m40[0m  [36m              (select-route routes)))[0m
+  [36m41[0m  [36m          state)})[0m
+  [36m42[0m  [36m; TODO: Rewright to component with inner state[0m
+  [36m43[0m  [36m(rum/defcs Router[0m
+
+[36m----  Compiler Warning : Please see src/csv-editor/router.cljs  ----[0m
+[32mSuccessfully compiled "resources/public/js/compiled/tmdb-movies.js" in 2.077 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/goog/deps.js
+notifying browser that file changed:  resources/public/js/compiled/out/cljs_deps.js
+notifying browser that file changed:  resources/public/js/compiled/out/tmdb_movies/router.js
+[0mCompiling "resources/public/js/compiled/tmdb-movies.js" from ["src"]...[0m
+[36m----  Compiler Warning on   src/csv-editor/router.cljs   line:38  column:18  ----[0m
+
+  [1mUse of undeclared Var tmdb-movies.router/blank?[0m
+
+  [36m34[0m  [36m  {:init (fn [state][0m
+  [36m35[0m  [36m           (let [routes (first (:rum/args state))[0m
+  [36m36[0m  [36m                 url (subs (aget js/window "location" "hash") 1)][0m
+  [36m37[0m  [36m            (.addEventListener js/window "hashchange" #(select-route routes))[0m
+  [33m38[0m  [1m            (if (blank? url)[0m
+  [0m  [0m  [33m                 ^--- Use of undeclared Var tmdb-movies.router/blank?[0m
+  [36m39[0m  [36m              (aset js/window "location" "hash" "/")[0m
+  [36m40[0m  [36m              (select-route routes)))[0m
+  [36m41[0m  [36m          state)})[0m
+  [36m42[0m  [36m; TODO: Rewright to component with inner state[0m
+  [36m43[0m  [36m(rum/defcs Router[0m
+
+[36m----  Compiler Warning : Please see src/csv-editor/router.cljs  ----[0m
+[32mSuccessfully compiled "resources/public/js/compiled/tmdb-movies.js" in 4.002 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/tmdb_movies/router.js
+[0mCompiling "resources/public/js/compiled/tmdb-movies.js" from ["src"]...[0m
+[32mSuccessfully compiled "resources/public/js/compiled/tmdb-movies.js" in 1.108 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/tmdb_movies/router.js
+[0mCompiling "resources/public/js/compiled/tmdb-movies.js" from ["src"]...[0m
+[32mSuccessfully compiled "resources/public/js/compiled/tmdb-movies.js" in 1.217 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/tmdb_movies/router.js
+[0mCompiling "resources/public/js/compiled/tmdb-movies.js" from ["src"]...[0m
+[32mSuccessfully compiled "resources/public/js/compiled/tmdb-movies.js" in 1.01 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/tmdb_movies/router.js
+[0mCompiling "resources/public/js/compiled/tmdb-movies.js" from ["src"]...[0m
+[32mSuccessfully compiled "resources/public/js/compiled/tmdb-movies.js" in 0.876 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/tmdb_movies/router.js

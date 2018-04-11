@@ -3,6 +3,10 @@
             [clojure.string :as string]))
 
 (def url-param-regex #":\w+")
+(def root-url "/")
+
+(defn get-current-url []
+  (subs (aget js/window "location" "hash") 1))
 
 (def init-state 
   {:route nil
@@ -24,7 +28,7 @@
    (zipmap keys values)))
 
 (defn select-route [routes]
-  (let [next-href (subs (aget js/window "location" "hash") 1)
+  (let [next-href (get-current-url)
         next-route (find-route routes next-href)]
     (when-not (nil? next-route) 
       (swap! router-state assoc :route next-route
@@ -34,7 +38,9 @@
   {:init (fn [state]
            (let [routes (first (:rum/args state))]
             (.addEventListener js/window "hashchange" #(select-route routes))
-            (select-route routes))
+            (if (string/blank? (get-current-url))
+              (aset js/window "location" "hash" root-url)
+              (select-route routes)))
           state)})
 
 (rum/defcs Router
