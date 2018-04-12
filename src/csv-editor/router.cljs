@@ -18,6 +18,29 @@
 (defn find-route [routes next-href]
   (first (filter #(not-empty (match-path (:href %) next-href)) routes)))
 
+; (defn find-route [routes next-href]
+;   (let [collect-routes (fn [acc route]
+;                          (let [matched-path (match-path (:href route) next-href)]
+;                           (if (not (nil? matched-path))
+;                             (if (vector? (:children route))
+;                              (conj acc route (collect-routes acc (:children route)))
+;                              (conj acc route))
+;                            acc)))]
+;     (js/console.log (clj->js (reduce collect-routes [] routes)))))
+
+(defn find-component [next-href acc route]
+  (js/console.log (clj->js acc))
+  (let [matched-path (match-path (:href route) next-href)]
+   (if (not (nil? matched-path))
+    ; (conj acc route)
+    (if (vector? (:children route))
+      (conj acc route (find-component next-href acc (:children route)))
+      (conj acc route))
+    acc)))
+
+(defn find-routes [routes next-href]
+  (reduce (partial find-component next-href) [] routes))
+          
 (defn extract-params [href url]
   (let [values (rest (match-path href url))
         keys (map #(keyword %) (re-seq url-param-regex href))]
@@ -25,10 +48,11 @@
 
 (defn select-route [routes]
   (let [next-href (subs (aget js/window "location" "hash") 1)
-        next-route (find-route routes next-href)]
-    (when-not (nil? next-route) 
-      (swap! router-state assoc :route next-route
-                                :params (extract-params (:href next-route) next-href)))))
+        next-route (find-routes routes next-href)]
+    (js/console.log (clj->js next-route))))
+    ; (when-not (nil? next-route) 
+    ;   (swap! router-state assoc :route next-route
+    ;                             :params (extract-params (:href next-route) next-href)))))
 
 (def init-route-mixin
   {:init (fn [state]

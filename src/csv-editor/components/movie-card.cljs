@@ -6,3 +6,4 @@
     [:h4 (.-title movie)]
     [:a {:href (str "#/movie/" (.-id movie))}
      "Open movie"]])
+
